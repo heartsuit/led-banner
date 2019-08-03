@@ -1,4 +1,5 @@
-import { app, BrowserWindow, screen } from 'electron'
+import { app, BrowserWindow, screen, globalShortcut, Menu, ipcMain } from 'electron'
+import '../renderer/store'
 
 /**
  * Set `__static` path to static files in production
@@ -13,15 +14,19 @@ const winURL = process.env.NODE_ENV === 'development'
   ? `http://localhost:9080`
   : `file://${__dirname}/index.html`
 
-function createWindow () {
+function createWindow() {
   /**
    * Initial window options
    */
   mainWindow = new BrowserWindow({
-    height: 563,
+    height: 123,
+    x: 0,
+    y: 0,
     useContentSize: true,
     width: screen.getPrimaryDisplay().workAreaSize.width,
-    frame: false
+    frame: false,
+    transparent: true,
+    alwaysOnTop: true
   })
 
   mainWindow.loadURL(winURL)
@@ -31,7 +36,15 @@ function createWindow () {
   })
 }
 
-app.on('ready', createWindow)
+app.on('ready', () => {
+  createWindow();
+  globalShortcut.register('CmdOrCtrl + Shift + C', () => {
+    // only when there is no configuration window, create one
+    if(configWindow == null) {
+      createConfigWindow();
+    }
+  })
+})
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
@@ -44,6 +57,50 @@ app.on('activate', () => {
     createWindow()
   }
 })
+
+app.on('will-quit', () => {
+  // 注销所有快捷键
+  globalShortcut.unregisterAll()
+})
+
+// configuration window
+let configWindow;
+function createConfigWindow() {
+  Menu.setApplicationMenu(null)
+  const modalPath = process.env.NODE_ENV === 'development'
+    ? 'http://localhost:9080/#/config'
+    : `file://${__dirname}/index.html#config`
+  // navigate with hash, supported by vue-router
+  configWindow = new BrowserWindow({
+    width: 600,
+    height: 400,
+    x: screen.getPrimaryDisplay().workAreaSize.width - 600,
+    y: 123,
+    webPreferences: {
+      webSecurity: false
+    },
+    parent: mainWindow, // as the children of mainWindow 
+    frame: false,
+    transparent: true,
+    resizable: false
+  })
+
+  configWindow.loadURL(modalPath)
+
+  configWindow.on('closed', () => {
+    configWindow = null
+  })
+
+  // listen on close event
+  ipcMain.on('window-close', function (e) {
+    configWindow.close();
+  })
+
+  // configWindow.on("close", (e) => {
+  //   e.preventDefault();
+  //   configWindow.minimize();
+  // })
+}
 
 /**
  * Auto Updater
