@@ -73,7 +73,7 @@ function createConfigWindow() {
   // navigate with hash, supported by vue-router
   configWindow = new BrowserWindow({
     width: 600,
-    height: 400,
+    height: 500,
     x: screen.getPrimaryDisplay().workAreaSize.width - 600,
     y: 123,
     webPreferences: {

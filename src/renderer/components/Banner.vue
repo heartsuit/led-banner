@@ -6,7 +6,7 @@
           :style="{fontFamily:properties.fontFamily, fontSize:properties.fontSize+'px', 
           color:properties.color, backgroundColor:properties.backgroundColor,
           lineHeight:properties.lineHeight+'px', letterSpacing:properties.letterSpacing+'px'}"
-        >{{content}}</div>
+        >{{properties.content}}</div>
       </section>
 
       <section style="-webkit-app-region: no-drag; text-align: right;">

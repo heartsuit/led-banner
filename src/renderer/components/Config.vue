@@ -8,6 +8,11 @@
     </div>
 
     <div class="block">
+      <span class="label">横幅内容</span>
+      <el-input class="input" placeholder="请输入内容" v-model="properties.content" clearable></el-input>
+    </div>
+
+    <div class="block">
       <span class="label">字体颜色</span>
       <el-color-picker class="picker" v-model="properties.color"></el-color-picker>
     </div>
@@ -43,9 +48,9 @@ export default {
     };
   },
   methods: {
-    close: ()=>{
-      let ipc = require('electron').ipcRenderer;
-      ipc.send('window-close');
+    close: () => {
+      let ipc = require("electron").ipcRenderer;
+      ipc.send("window-close");
     }
   },
   computed: {},
@@ -94,6 +99,7 @@ body {
   line-height: 44px;
 }
 
+.input,
 .picker,
 .slider {
   float: right;

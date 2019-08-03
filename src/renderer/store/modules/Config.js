@@ -1,5 +1,6 @@
 const state = {
   properties: {
+    content: "欢迎公益事业促进会会长一行莅临指导！",
     fontFamily: "Microsoft YaHei",
     fontSize: 90,
     color: "yellow",
