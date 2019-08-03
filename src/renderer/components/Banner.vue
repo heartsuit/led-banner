@@ -3,17 +3,26 @@
     <header style="-webkit-app-region: drag">
       <section class="header">
         <div
-          :style="{fontFamily:properties.fontFamily, fontSize:properties.fontSize, 
+          :style="{fontFamily:properties.fontFamily, fontSize:properties.fontSize+'px', 
           color:properties.color, backgroundColor:properties.backgroundColor,
-          lineHeight:properties.lineHeight, letterSpacing:properties.letterSpacing}"
+          lineHeight:properties.lineHeight+'px', letterSpacing:properties.letterSpacing+'px'}"
         >{{content}}</div>
       </section>
 
-      <section style="-webkit-app-region: no-drag">
+      <section
+        style="-webkit-app-region: no-drag; text-align: right;"
+        @mouseenter="showConifg"
+        @mouseleave="hideConfig"
+      >
         <!--html代码-->
+        <!-- <div v-show="ifShowConfig"> -->
+          <el-popover placement="bottom" title="设置" width="900" trigger="click">
+            <config @apply="update" :params="properties"></config>
+            <el-button slot="reference">设置</el-button>
+          </el-popover>
+        <!-- </div> -->
       </section>
     </header>
-    <config @apply="update"></config>
   </div>
 </template>
 
@@ -27,18 +36,25 @@ export default {
     return {
       content: "欢迎公益事业促进会会长一行莅临指导！",
       properties: {
-        fontFamily: "",
-        fontSize: "",
-        color: "",
-        backgroundColor: "",
-        lineHeight: "",
-        letterSpacing: ""
-      }
+        fontFamily: "Microsoft YaHei",
+        fontSize: 80,
+        color: "#00FF00",
+        backgroundColor: "red",
+        lineHeight: 100,
+        letterSpacing: 16
+      },
+      ifShowConfig: false
     };
   },
   methods: {
     update(params) {
       this.properties = params;
+    },
+    showConifg() {
+      this.ifShowConfig = true;
+    },
+    hideConfig() {
+      this.ifShowConfig = false;
     }
   }
 };
