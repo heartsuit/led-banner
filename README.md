@@ -14,8 +14,14 @@ npm run dev
 # build electron application for production
 npm run build
 
-
 ```
+
+### How to USE
+
+- Launch the application: led-banner.exe
+
+- Press `CmdOrCtrl + Shift + C` to open the configuration pannel
+
 
 ---
 
