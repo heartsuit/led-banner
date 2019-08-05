@@ -13,6 +13,19 @@
     </div>
 
     <div class="block">
+      <span class="label">字体样式</span>
+      <el-select class="select" v-model="properties.fontFamily" filterable placeholder="请选择字体">
+        <el-option
+          :style="{fontFamily:item.value}"
+          v-for="item in options"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        ></el-option>
+      </el-select>
+    </div>
+
+    <div class="block">
       <span class="label">字体颜色</span>
       <el-color-picker class="picker" v-model="properties.color"></el-color-picker>
     </div>
@@ -44,7 +57,29 @@ export default {
   // props: ["params"],
   data() {
     return {
-      properties: this.$store.state.Config.properties
+      properties: this.$store.state.Config.properties,
+
+      // Reference: 
+      // https://www.jianshu.com/p/ab9d7fbc5c5e
+      // https://blog.csdn.net/cddcj/article/details/70739481
+      fontFamily: "Microsoft YaHei",
+      options: [
+        { value: "Microsoft YaHei", label: "微软雅黑" },
+        { value: "Microsoft JhengHei", label: "微软正黑体" },        
+        { value: "SimHei", label: "黑体" },
+        { value: "SimSun", label: "宋体" },
+        { value: "FangSong", label: "仿宋" },
+        { value: "KaiTi", label: "楷体" },
+        { value: "YouYuan", label: "幼圆" },
+        { value: "STXihei", label: "华文细黑" },
+        { value: "STFangsong", label: "华文仿宋" },
+        { value: "FZShuTi", label: "方正舒体" },
+        { value: "FZYaoti", label: "方正姚体" },
+        { value: "STCaiyun", label: "华文彩云" },
+        { value: "STHupo", label: "华文琥珀" },
+        { value: "STXinwei", label: "华文新魏" },
+        { value: "STXingkai", label: "华文行楷" }
+      ]
     };
   },
   methods: {
@@ -57,7 +92,6 @@ export default {
   watch: {
     properties: {
       handler(newValue, oldValue) {
-        console.log(0, this.properties);
         this.$store.dispatch("UPDATE_PROPERTY", this.properties);
       },
       deep: true
@@ -100,6 +134,7 @@ body {
 }
 
 .input,
+.select,
 .picker,
 .slider {
   float: right;
