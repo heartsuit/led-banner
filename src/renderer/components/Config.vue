@@ -27,12 +27,22 @@
 
     <div class="block">
       <span class="label">字体颜色</span>
-      <el-color-picker class="picker" v-model="properties.color"></el-color-picker>
+      <el-color-picker
+        show-alpha
+        :predefine="predefineColors"
+        class="picker"
+        v-model="properties.color"
+      ></el-color-picker>
     </div>
 
     <div class="block">
       <span class="label">背景颜色</span>
-      <el-color-picker class="picker" v-model="properties.backgroundColor"></el-color-picker>
+      <el-color-picker
+        show-alpha
+        :predefine="predefineColors"
+        class="picker"
+        v-model="properties.backgroundColor"
+      ></el-color-picker>
     </div>
 
     <div class="block">
@@ -59,13 +69,13 @@ export default {
     return {
       properties: this.$store.state.Config.properties,
 
-      // Reference: 
+      // Reference:
       // https://www.jianshu.com/p/ab9d7fbc5c5e
       // https://blog.csdn.net/cddcj/article/details/70739481
       fontFamily: "Microsoft YaHei",
       options: [
         { value: "Microsoft YaHei", label: "微软雅黑" },
-        { value: "Microsoft JhengHei", label: "微软正黑体" },        
+        { value: "Microsoft JhengHei", label: "微软正黑体" },
         { value: "SimHei", label: "黑体" },
         { value: "SimSun", label: "宋体" },
         { value: "FangSong", label: "仿宋" },
@@ -79,6 +89,21 @@ export default {
         { value: "STHupo", label: "华文琥珀" },
         { value: "STXinwei", label: "华文新魏" },
         { value: "STXingkai", label: "华文行楷" }
+      ],
+      predefineColors: [
+        "#FF0000",
+        "#ffd700",
+        "#ff4500",
+        "#ff8c00",
+        "#90ee90",
+        "#00ced1",
+        "#1e90ff",
+        "#c71585",
+        "rgb(255, 120, 0)",
+        "hsl(181, 100%, 37%)",
+        "rgba(255, 69, 0, 0.68)",
+        "hsva(120, 40, 94, 0.5)",
+        "hsla(209, 100%, 56%, 0.73)"
       ]
     };
   },
