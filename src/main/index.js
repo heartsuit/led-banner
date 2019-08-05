@@ -26,7 +26,8 @@ function createWindow() {
     width: screen.getPrimaryDisplay().workAreaSize.width,
     frame: false,
     transparent: true,
-    alwaysOnTop: true
+    alwaysOnTop: true,
+    maximizable: false
   })
 
   mainWindow.loadURL(winURL)
@@ -34,13 +35,19 @@ function createWindow() {
   mainWindow.on('closed', () => {
     mainWindow = null
   })
+
+  ipcMain.on('open-config', function (e) {
+    if (configWindow == null) {
+      createConfigWindow();
+    }
+  })
 }
 
 app.on('ready', () => {
   createWindow();
   globalShortcut.register('CmdOrCtrl + Shift + C', () => {
     // only when there is no configuration window, create one
-    if(configWindow == null) {
+    if (configWindow == null) {
       createConfigWindow();
     }
   })
@@ -82,7 +89,8 @@ function createConfigWindow() {
     parent: mainWindow, // as the children of mainWindow 
     frame: false,
     transparent: true,
-    resizable: false
+    resizable: false,
+    maximizable: false
   })
 
   configWindow.loadURL(modalPath)
@@ -95,11 +103,6 @@ function createConfigWindow() {
   ipcMain.on('window-close', function (e) {
     configWindow.close();
   })
-
-  // configWindow.on("close", (e) => {
-  //   e.preventDefault();
-  //   configWindow.minimize();
-  // })
 }
 
 /**
