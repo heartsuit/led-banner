@@ -43,6 +43,20 @@ function createWindow() {
   })
 }
 
+// Only open one application
+const isSecondInstance = app.makeSingleInstance((commandLine, workingDirectory) => {
+  // Someone tried to run a second instance, we should focus our window.
+  if (mainWindow) {
+    if (mainWindow.isMinimized()) mainWindow.restore();
+    mainWindow.focus();
+    mainWindow.show();
+  }
+})
+
+if (isSecondInstance) {
+  app.quit();
+}
+
 app.on('ready', () => {
   createWindow();
   globalShortcut.register('CmdOrCtrl + Shift + C', () => {
