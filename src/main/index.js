@@ -115,7 +115,9 @@ function createConfigWindow() {
 
   // listen on close event
   ipcMain.on('window-close', function (e) {
-    configWindow.close();
+    if (configWindow != null) {
+      configWindow.close();
+    }
   })
 }
 
