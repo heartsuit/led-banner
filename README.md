@@ -1,8 +1,25 @@
 # led-banner
 
-> LED banner
+> LED banner: An electron-vue application with features of LED Banner and cover.
 
-#### Build Setup
+### Appearance
+
+![2019-08-06-LED-Banner.jpg](https://github.com/heartsuit/heartsuit.github.io/raw/master/pictures/2019-08-06-LED-Banner.jpg)
+
+![2019-08-06-LED-Banner.gif](https://github.com/heartsuit/heartsuit.github.io/raw/master/pictures/2019-08-06-LED-Banner.gif)
+
+### Features
+
+- Display a banner on the top of the desktop window
+
+- Support visualized configuration: banner content, font family, font color, background color, font size, line height and letter spacing
+
+
+### Technology stack
+
+vue-electron, element-ui and vuex-electron
+
+### Build Setup
 
 ``` bash
 # install dependencies
@@ -20,7 +37,7 @@ npm run build
 
 - Launch the application: led-banner.exe
 
-- Press `CmdOrCtrl + Shift + C` to open the configuration pannel
+- Click the button "设置" or Press `CmdOrCtrl + Shift + C` to open the configuration panel
 
 
 ---
