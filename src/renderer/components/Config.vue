@@ -67,7 +67,9 @@ export default {
   // props: ["params"],
   data() {
     return {
-      properties: this.$store.state.Config.properties,
+      // properties: this.$store.state.Config.properties, // "Error: [vuex] do not mutate vuex store state outside mutation handlers."
+      // properties: JSON.parse(JSON.stringify(this.$store.state.Config.properties)), // no problem
+      properties: Object.assign({}, this.$store.state.Config.properties), // no problem
 
       // Reference:
       // https://www.jianshu.com/p/ab9d7fbc5c5e

@@ -12,7 +12,7 @@ const state = {
 
 const mutations = {
   UPDATE_PROPERTY(state, newProperty) {
-    state.properties = Object.assign({}, state.properties, newProperty);
+    state.properties = newProperty;
   }
 }
 
