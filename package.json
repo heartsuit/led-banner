@@ -7,6 +7,9 @@
   "main": "./dist/electron/main.js",
   "scripts": {
     "build": "node .electron-vue/build.js && electron-builder",
+    "win32": "node .electron-vue/build.js && electron-builder --platform=win32  --arch=ia32",
+    "linux": "node .electron-vue/build.js && electron-builder --platform=linux",
+    "mac": "node .electron-vue/build.js && electron-builder --platform=drwin",
     "build:dir": "node .electron-vue/build.js && electron-builder --dir",
     "build:clean": "cross-env BUILD_TARGET=clean node .electron-vue/build.js",
     "build:web": "cross-env BUILD_TARGET=web node .electron-vue/build.js",
@@ -26,8 +29,7 @@
       "dist/electron/**/*"
     ],
     "dmg": {
-      "contents": [
-        {
+      "contents": [{
           "x": 410,
           "y": 150,
           "type": "link",
@@ -41,10 +43,12 @@
       ]
     },
     "mac": {
-      "icon": "build/icons/icon.icns"
+      "icon": "build/icons/icon.icns",
+      "target": ["dmg", "zip"]
     },
     "win": {
-      "icon": "build/icons/icon.ico"
+      "icon": "build/icons/icon.ico",
+      "target": ["nsis", "zip", "portable"]
     },
     "linux": {
       "icon": "build/icons"
